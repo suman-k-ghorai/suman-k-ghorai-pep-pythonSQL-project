@@ -48,7 +48,6 @@ def main():
 
 # This function will load the users.csv file into the users table, discarding any records with incomplete data
 def load_and_clean_users(file_path):
-     # Open and read the CSV file
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
         next(reader)
@@ -84,17 +83,17 @@ def write_user_analytics(csv_file_path):
         GROUP BY userId
     ''')
 
-    # Fetch all results
+    
     rows = cursor.fetchall()
 
-    # Open the CSV file for writing
+    
     with open(csv_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
 
-        # Write the header
+        
         writer.writerow(['userId', 'avgDuration', 'numCalls'])
 
-        # Write the rows of analytics data
+        
         for row in rows:
             writer.writerow(row)
 
@@ -109,17 +108,16 @@ def write_ordered_calls(csv_file_path):
         ORDER BY userId, startTime
     ''')
 
-    # Fetch all results
+    # Fetch all result
     rows = cursor.fetchall()
 
-    # Open the CSV file for writing
+
     with open(csv_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
 
-        # Write the header
         writer.writerow(['callId', 'phoneNumber', 'startTime', 'endTime', 'direction', 'userId'])
 
-        # Write the rows of ordered call logs
+        
         for row in rows:
             writer.writerow(row)
 
